@@ -8,14 +8,14 @@ body {
   text-align: center;
 }
 
-/* Canvas */
+/* CANVAS */
 #textRain {
   position: fixed;
   inset: 0;
   z-index: 1;
 }
 
-/* MAIN / SHAYARI TEXT */
+/* MAIN TEXT */
 .headline {
   position: fixed;
   top: 50%;
@@ -27,8 +27,8 @@ body {
 
   font-size: clamp(22px, 5vw, 38px);
   font-weight: 700;
-  letter-spacing: 1.5px;
   color: #ff4da6;
+  letter-spacing: 1.5px;
 
   text-shadow:
     0 0 12px rgba(255,77,166,0.7),
@@ -37,7 +37,7 @@ body {
   min-height: 60px;
 }
 
-/* Glow background */
+/* GLOW BG */
 .headline::before {
   content: "";
   position: absolute;
@@ -50,21 +50,20 @@ body {
   z-index: -1;
 }
 
-/* Heart glow between */
+/* HEART GLOW BETWEEN */
 #heartGlow {
   position: fixed;
   top: calc(50% + 90px);
   left: 50%;
   transform: translateX(-50%);
   font-size: 32px;
-  color: #ff5fa2;
   opacity: 0;
   z-index: 4;
-  text-shadow: 0 0 20px #ff5fa2;
+  text-shadow: 0 0 25px #ff5fa2;
   transition: opacity 1s ease;
 }
 
-/* CLICK HEART BALLOON */
+/* CLICK HEART */
 .heart-float {
   position: fixed;
   font-size: 18px;
@@ -73,8 +72,8 @@ body {
 }
 
 @keyframes floatUp {
-  0% { transform: translateY(0) scale(1); opacity: 1; }
-  100% { transform: translateY(-120px) scale(1.3); opacity: 0; }
+  from { transform: translateY(0); opacity: 1; }
+  to   { transform: translateY(-120px) scale(1.3); opacity: 0; }
 }
 
 /* ROTATE OVERLAY */
@@ -88,6 +87,7 @@ body {
   align-items: center;
   justify-content: center;
   color: #ff4da6;
+  touch-action: none;
 }
 
 .phone {
