@@ -1,7 +1,75 @@
+/* =====================
+   ROTATE FIX (NO FREEZE)
+   ===================== */
+const overlay = document.getElementById("rotateOverlay");
+
+function checkOrientation() {
+  const landscape = window.matchMedia("(orientation: landscape)").matches;
+  overlay.style.display = landscape ? "none" : "flex";
+}
+
+addEventListener("resize", checkOrientation);
+addEventListener("orientationchange", checkOrientation);
+setInterval(checkOrientation, 500);
+checkOrientation();
+
+/* =====================
+   BACKGROUND RAIN
+   ===================== */
+const canvas = document.getElementById("textRain");
+const ctx = canvas.getContext("2d");
+let fontSize = 16;
+const chars = "HAPPY VALENTINE ";
+const hearts = ["❤️","💖"];
+let drops = [];
+
+function resize() {
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+  drops = Array.from({ length: Math.floor(canvas.width / fontSize) },
+    () => Math.random() * canvas.height);
+}
+resize();
+addEventListener("resize", resize);
+
+function rain() {
+  ctx.fillStyle = "rgba(0,0,0,0.25)";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.font = fontSize+"px monospace";
+
+  drops.forEach((y,i)=>{
+    ctx.fillStyle = "#ff4da6";
+    ctx.fillText(
+      Math.random()<0.1 ? hearts[Math.floor(Math.random()*2)]
+      : chars[Math.floor(Math.random()*chars.length)],
+      i*fontSize, y
+    );
+    drops[i]+=fontSize;
+    if(y>canvas.height) drops[i]=0;
+  });
+  requestAnimationFrame(rain);
+}
+rain();
+
+/* =====================
+   CLICK HEART BALLOON
+   ===================== */
+document.addEventListener("click", e=>{
+  const h=document.createElement("div");
+  h.className="heart-float";
+  h.innerText="❤️";
+  h.style.left=e.clientX+"px";
+  h.style.top=e.clientY+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),3000);
+});
+
+/* =====================
+   TEXT SEQUENCE LOOP
+   ===================== */
 const mainText = document.getElementById("mainText");
 const heartGlow = document.getElementById("heartGlow");
 
-/* MAIN LINES */
 const mainLines = [
   "💛 HAPPY VALENTINE DAY 💛",
   "💚 MY 💚",
@@ -9,7 +77,6 @@ const mainLines = [
   "🌎 YOU ARE MY WORLD 🌎"
 ];
 
-/* SHAYARI */
 const shayariLines = [
   "Benam mohabbat dil mein daba rakhi hai",
   "Teri chahat sapno mein saja rakhi hai",
@@ -17,32 +84,26 @@ const shayariLines = [
   "Yeh ummeed bas tum se laga rakhi hai"
 ];
 
+let phase = "main";
 let index = 0;
-let phase = "main"; // main → shayari
 
 function playSequence() {
   heartGlow.style.opacity = "1";
 
   if (phase === "main") {
-    mainText.innerText = mainLines[index];
-    index++;
-
+    mainText.innerText = mainLines[index++];
     if (index >= mainLines.length) {
       index = 0;
       phase = "shayari";
     }
-
-  } else if (phase === "shayari") {
-    mainText.innerText = shayariLines[index];
-    index++;
-
+  } else {
+    mainText.innerText = shayariLines[index++];
     if (index >= shayariLines.length) {
       index = 0;
-      phase = "main"; // 🔁 restart
+      phase = "main";
     }
   }
 }
 
-/* START LOOP */
 playSequence();
-setInterval(playSequence, 4000); // ⏱️ 4 sec per line
+setInterval(playSequence, 4000);
