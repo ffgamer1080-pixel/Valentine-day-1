@@ -65,6 +65,7 @@ const mainLines=[
  "💚 MY 💚",
  "🩵 SWEETHEART 🩵",
  "🌎 YOU ARE MY WORLD 🌎"
+ "💛🩷 I LOVE YOU 🩷💛",
 ];
 const shayariLines=[
  "Benam mohabbat dil mein daba rakhi hai",
