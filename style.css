@@ -24,20 +24,15 @@ body {
   z-index: 5;
   width: 100%;
   padding: 0 14px;
-
   font-size: clamp(22px, 5vw, 38px);
   font-weight: 700;
   color: #ff4da6;
   letter-spacing: 1.5px;
-
-  text-shadow:
-    0 0 12px rgba(255,77,166,0.7),
-    0 0 35px rgba(255,77,166,1);
-
+  text-shadow: 0 0 12px rgba(255,77,166,0.7),
+               0 0 35px rgba(255,77,166,1);
   min-height: 60px;
 }
 
-/* GLOW BG */
 .headline::before {
   content: "";
   position: absolute;
@@ -50,7 +45,7 @@ body {
   z-index: -1;
 }
 
-/* HEART GLOW BETWEEN */
+/* HEART GLOW */
 #heartGlow {
   position: fixed;
   top: calc(50% + 90px);
@@ -103,4 +98,28 @@ body {
   0% { transform: rotate(0deg); }
   50% { transform: rotate(90deg); }
   100% { transform: rotate(0deg); }
+}
+
+/* 🎵 MUSIC ICON (ADDED) */
+#musicToggle {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,77,166,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 10000;
+  color: #ff4da6;
+  box-shadow: 0 0 15px rgba(255,77,166,0.6);
+}
+
+#musicToggle.paused {
+  opacity: 0.5;
+  box-shadow: none;
 }
